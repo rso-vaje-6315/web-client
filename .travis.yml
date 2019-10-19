@@ -1,0 +1,39 @@
+sudo: required
+
+services:
+  - docker
+
+language: node_js
+dist: trusty
+node_js:
+  - '12'
+
+branches:
+  only:
+    - develop
+
+cache:
+  directories:
+    - ./node_modules
+
+install: npm install
+
+script:
+  - mvn run build
+  - docker build -t rso6315/web-client .
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push rso6315/web-client
+
+notifications:
+  email: false
+  slack:
+    rooms:
+      - rso-6315:GemkjD1zzD1AAKrXCrn9LUC3
+    on_success: always
+    on_failure: always
+    template:
+      - "`%{result}` build for repo `%{repository_slug}` on branch `%{branch}`. Build (<%{build_url}|#%{build_number}>). Commit (<%{compare_url}|%{commit}>)."
+      - "Execution time: *%{duration}*"
+      - "Message: *%{message}*"
