@@ -19,7 +19,7 @@ cache:
 install: npm install
 
 script:
-  - mvn run build
+  - npm run build
   - docker build -t rso6315/web-client .
 
 after_success:
