@@ -1,0 +1,7 @@
+{
+    "keycloak": {
+        "realm": "$RSO_KEYCLOAK_REALM",
+        "clientId": "$RSO_KEYCLOAK_CLIENTID",
+        "url": "$RSO_KEYCLOAK_URL"
+    }
+}
