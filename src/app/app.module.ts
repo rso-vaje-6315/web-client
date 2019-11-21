@@ -3,18 +3,31 @@ import { APP_INITIALIZER, NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { IndexComponent } from "./index/index.component";
 import { AppConfigFactory, KeycloakValuesFactory } from "./factories";
 import { KEYCLOAK_VALUES } from "./injectables";
+import { HttpClientModule } from "@angular/common/http";
+import { IconsModule } from "./icons.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BootstrapModule } from "./bootstrap.module";
+import { IndexPageComponent } from "./pages/index-page/index-page.component";
+import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
 
 @NgModule({
+    entryComponents: [
+        ConfirmationDialogComponent
+    ],
     declarations: [
         AppComponent,
-        IndexComponent
+        IndexPageComponent,
+        ConfirmationDialogComponent
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        HttpClientModule,
+        BootstrapModule,
+        IconsModule,
+        AppRoutingModule,
+        BrowserAnimationsModule
     ],
     providers: [
         {provide: APP_INITIALIZER, useFactory: AppConfigFactory, multi: true},

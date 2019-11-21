@@ -95,7 +95,8 @@
         ],
         "no-trailing-whitespace": false,
         "no-string-literal": false,
-        "whitespace":[true, "check-module"]
+        "whitespace":[true, "check-module"],
+        "no-namespace": false
     },
     "rulesDirectory": [
         "codelyzer"
