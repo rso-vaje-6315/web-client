@@ -1,4 +1,5 @@
 {
+    "apiUrl": "$RSO_API_URL",
     "keycloak": {
         "realm": "$RSO_KEYCLOAK_REALM",
         "clientId": "$RSO_KEYCLOAK_CLIENTID",

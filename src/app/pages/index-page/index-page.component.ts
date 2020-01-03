@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { KEYCLOAK_VALUES } from "../../injectables";
+import { API_URL } from "../../injectables";
 import { DialogService } from "../../services/dialog.service";
 import { BsModalRef } from "ngx-bootstrap";
 
@@ -10,12 +10,12 @@ import { BsModalRef } from "ngx-bootstrap";
 })
 export class IndexPageComponent implements OnInit {
 
-    constructor(@Inject(KEYCLOAK_VALUES) private keycloakValues: string,
+    constructor(@Inject(API_URL) private apiUrl: string,
                 private dialogService: DialogService) {
     }
 
     ngOnInit() {
-        console.log("Keycloak runtime configuration: ", this.keycloakValues);
+        console.log("Calling api to: ", this.apiUrl);
         this.dialogService.openToastNotification("Toast test!", "Toast body!", "info");
     }
 
@@ -28,7 +28,7 @@ export class IndexPageComponent implements OnInit {
             onDecline: (ref) => {
                 this.dialogService.openToastNotification("Test", "Failed! :( You had one job!", "error");
             }
-        }, { declineIsDestructive: true });
+        }, {declineIsDestructive: true});
     }
 
 }

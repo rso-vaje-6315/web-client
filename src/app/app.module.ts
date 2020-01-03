@@ -3,14 +3,15 @@ import { APP_INITIALIZER, NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AppConfigFactory, KeycloakValuesFactory } from "./factories";
-import { KEYCLOAK_VALUES } from "./injectables";
-import { HttpClientModule } from "@angular/common/http";
+import { ApiUrlFactory, AppConfigFactory } from "./factories";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { IconsModule } from "./icons.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BootstrapModule } from "./bootstrap.module";
 import { IndexPageComponent } from "./pages/index-page/index-page.component";
 import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
+import { AuthInterceptor } from "@mjamsek/ngx-keycloak-service";
+import { API_URL } from "./injectables";
 
 @NgModule({
     entryComponents: [
@@ -31,7 +32,8 @@ import { ConfirmationDialogComponent } from "./components/confirmation-dialog/co
     ],
     providers: [
         {provide: APP_INITIALIZER, useFactory: AppConfigFactory, multi: true},
-        {provide: KEYCLOAK_VALUES, useFactory: KeycloakValuesFactory, multi: false}
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+        {provide: API_URL, useFactory: ApiUrlFactory, multi: false}
     ],
     bootstrap: [AppComponent]
 })

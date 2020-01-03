@@ -6,9 +6,10 @@ import { RsoWebClientEnv } from "./env.model";
 
 export const environment: RsoWebClientEnv = {
     production: false,
+    apiUrl: "",
     keycloak: {
         realm: "rso",
-        clientId: "web-client",
+        clientId: "rso-public",
         url: "https://keycloak.mjamsek.com/auth"
     }
 };

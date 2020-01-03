@@ -1,1 +1,1 @@
-export const KEYCLOAK_VALUES = "keycloakValue";
+export const API_URL = "apiUrl";
