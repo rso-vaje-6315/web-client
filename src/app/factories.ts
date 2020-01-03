@@ -5,7 +5,7 @@ import { KeycloakService } from "@mjamsek/ngx-keycloak-service";
 
 export function AppConfigFactory() {
     return async () => {
-        await ConfigService.initialize<RsoWebClientEnv>({path: "/config/config.json", environment});
+        await ConfigService.initialize<RsoWebClientEnv>({path: "/ui/config/config.json", environment});
 
         await KeycloakService.initialize({
             ...ConfigService.getConfig<RsoWebClientEnv>().keycloak,
