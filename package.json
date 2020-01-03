@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start": "ng serve --serve-path=/ui/",
         "build": "ng build --prod",
         "build:prod": "ng build --base-href=/ui/ --prod",
         "test": "ng test",
