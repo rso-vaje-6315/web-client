@@ -2,6 +2,7 @@ import { ConfigService } from "@mjamsek/ngx-config";
 import { RsoWebClientEnv } from "../environments/env.model";
 import { environment } from "../environments/environment";
 import { KeycloakService } from "@mjamsek/ngx-keycloak-service";
+import { InjectionToken } from "@angular/core";
 
 export function AppConfigFactory() {
     return async () => {
@@ -19,6 +20,9 @@ export function AppConfigFactory() {
     };
 }
 
-export function ApiUrlFactory() {
-    return ConfigService.getConfig<RsoWebClientEnv>().apiUrl;
-}
+export const API_URL = new InjectionToken<string>("API url", {
+    providedIn: "root",
+    factory: () => {
+        return ConfigService.getConfig<RsoWebClientEnv>().apiUrl;
+    }
+});
