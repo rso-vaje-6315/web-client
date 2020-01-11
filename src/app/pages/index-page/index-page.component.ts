@@ -16,7 +16,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<boolean>();
     private list$ = new Subject<void>();
-    private products$: Observable<Product[]>;
+    public products$: Observable<Product[]>;
 
 
     constructor(private productsService: ProductsService) {

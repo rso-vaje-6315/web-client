@@ -14,7 +14,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<boolean>();
     private trigger$ = new Subject<void>();
-    private cart$: Observable<CartProduct[]>;
+    public cart$: Observable<CartProduct[]>;
 
     constructor(private cartService: CartService,
                 private dialogService: DialogService) {
