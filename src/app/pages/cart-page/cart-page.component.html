@@ -1,0 +1,31 @@
+
+<h2>Shopping Cart</h2>
+
+<div *ngIf="cart$ | async as carts" class="carts">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cart of carts">
+                <td>
+                    <a [routerLink]="['/products', cart.product.id]">
+                        {{cart.product.name}}
+                    </a>
+                </td>
+                <td>{{cart.cart.quantity}}</td>
+                <td>
+                    <span class="action-btn" (click)="updateQuantity(cart.product.id, cart.cart.quantity, 1)">+</span>
+                    <span class="action-btn" (click)="updateQuantity(cart.product.id, cart.cart.quantity, -1)">-</span>
+                    <span class="action-btn" (click)="removeCartItem(cart.product.id)">X</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -6,7 +6,7 @@ import { RsoWebClientEnv } from "./env.model";
 
 export const environment: RsoWebClientEnv = {
     production: false,
-    apiUrl: "http://34.89.139.199",
+    apiUrl: "http://35.246.208.18",
     keycloak: {
         realm: "rso",
         clientId: "rso-public",

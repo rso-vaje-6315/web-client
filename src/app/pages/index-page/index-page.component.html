@@ -1,2 +1,13 @@
-<p>index-page works!</p>
-
+<div *ngIf="products$ | async as products" class="products">
+    <div *ngFor="let product of products" class="product">
+        <div class="image">
+            <img [src]="product.imagePath"/>
+        </div>
+        <div class="details">
+            <div>
+                <a [routerLink]="['/products', product.id]">{{product.name}}</a>
+            </div>
+            <div>{{product.price}} €</div>
+        </div>
+    </div>
+</div>
