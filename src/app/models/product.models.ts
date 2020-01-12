@@ -30,3 +30,8 @@ export class ProductDetails extends Product {
     public averageRatingNumber?: number;
     public ratings?: Rating[];
 }
+
+export class ProductStock {
+    public productId: string;
+    public quantity: number;
+}

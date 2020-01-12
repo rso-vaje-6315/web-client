@@ -1,12 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { Apollo, SubscriptionResult } from "apollo-angular";
 import { Observable, of } from "rxjs";
 import gql from "graphql-tag";
 import { catchError, map, switchMap } from "rxjs/operators";
-import { AverageRating, Product } from "../models";
+import { AverageRating, Product, ProductStock } from "../models";
 import { RatingsService } from "./ratings.service";
-import { ProductDetails } from "../models/product.models";
-import { HttpErrorResponse } from "@angular/common/http";
+import { ProductDetails } from "../models";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { API_URL } from "../factories";
 
 @Injectable({
     providedIn: "root"
@@ -14,6 +15,8 @@ import { HttpErrorResponse } from "@angular/common/http";
 export class ProductsService {
 
     constructor(private apollo: Apollo,
+                @Inject(API_URL) private apiUrl: string,
+                private http: HttpClient,
                 private ratingsService: RatingsService,) {
     }
 
@@ -96,5 +99,10 @@ export class ProductsService {
                 );
             })
         );
+    }
+
+    public getProductStock(productId: string): Observable<ProductStock> {
+        const url = `${this.apiUrl}/stock-service/v1/warehouses/allstock/${productId}`;
+        return this.http.get(url).pipe(map(res => res as ProductStock));
     }
 }

@@ -10,11 +10,15 @@
     </div>
     <div>
         <span>
-            Price: {{product.price}} €
+            Price: {{product.price}}€
         </span>
-        <span class="cart-btn">
+        <span class="cart-btn" *ngIf="authenticated && productStock > 0">
             <button (click)="addToCart(product)">Add to cart</button>
         </span>
+    </div>
+    <div>
+        <span *ngIf="productStock > 0">In stock: {{productStock}}</span>
+        <span *ngIf="productStock === 0">Out of stock</span>
     </div>
     <div>
         <img [src]="product.imagePath"/>

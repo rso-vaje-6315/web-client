@@ -1,0 +1,26 @@
+<h2>Orders</h2>
+
+<div *ngIf="orders$ | async as orders">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Order date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.status}}</td>
+                <td>
+                    <a [routerLink]="['/orders', order.id]">
+                        {{order.timestamp | date: "dd.MM.yyyy HH:mm:ss"}}
+                    </a>
+                </td>
+                <td>{{order.price}} €</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

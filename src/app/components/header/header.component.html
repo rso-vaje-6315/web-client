@@ -14,9 +14,7 @@
         </div>
     </div>
     <div class="login">
-        <span *ngIf="authenticated">
-            {{name}}
-        </span>
+        <a [routerLink]="['/profile']" *ngIf="authenticated" style="margin-right: 10px">{{name}}</a>
         <span (click)="logout()" *ngIf="authenticated">Logout</span>
         <span (click)="login()" *ngIf="!authenticated">Login</span>
     </div>

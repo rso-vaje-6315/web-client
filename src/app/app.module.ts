@@ -16,6 +16,10 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MediaInterceptor } from "./services/media.interceptor";
+import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
+import { OrderDetailsPageComponent } from './pages/order-details-page/order-details-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     entryComponents: [
@@ -27,16 +31,21 @@ import { MediaInterceptor } from "./services/media.interceptor";
         ConfirmationDialogComponent,
         ProductDetailsPageComponent,
         CartPageComponent,
-        HeaderComponent
+        HeaderComponent,
+        OrdersPageComponent,
+        OrderDetailsPageComponent,
+        ProfilePageComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
+        FormsModule,
         BootstrapModule,
         IconsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        GraphQLModule
+        GraphQLModule,
+        ReactiveFormsModule
     ],
     providers: [
         {provide: APP_INITIALIZER, useFactory: AppConfigFactory, multi: true},

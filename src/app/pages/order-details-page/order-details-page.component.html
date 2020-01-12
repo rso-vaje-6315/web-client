@@ -1,0 +1,48 @@
+<div *ngIf="order$ | async as order">
+
+    <div>
+        Order date: {{order.timestamp | date: "dd.MM.yyyy HH:mm:ss"}}
+    </div>
+    <div>
+        Order amount: {{order.price}}€
+    </div>
+    <div>
+        Order status: {{order.status}}
+    </div>
+
+    <div *ngIf="order.products && order.products.length > 0" style="margin-top: 40px">
+        <h3>Products</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-center">Code</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Price per item</th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of order.products">
+                    <td class="text-center">{{product.code}}</td>
+                    <td class="text-center">{{product.name}}</td>
+                    <td class="text-center">{{product.quantity}}</td>
+                    <td class="text-center">{{product.pricePerItem | number: "1.2"}}€</td>
+                    <td class="text-center">{{product.quantity * product.pricePerItem | number: "1.2"}}€</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="order.address" style="margin-top: 40px">
+        <h3>Delivery address</h3>
+        <p>Deliver to:</p>
+        <div>{{order.address.name}}</div>
+        <div>{{order.address.street}}</div>
+        <div>{{order.address.post}}</div>
+        <div>{{order.address.country}}</div>
+        <div>{{order.address.phone}}</div>
+        <div>{{order.address.email}}</div>
+    </div>
+
+</div>

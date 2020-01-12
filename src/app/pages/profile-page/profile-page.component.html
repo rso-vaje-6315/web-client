@@ -1,0 +1,67 @@
+<div *ngIf="customer">
+    <h2>{{customer.account.firstName}} {{customer.account.lastName}}</h2>
+
+
+    <h3 style="margin-top: 40px">Addresses</h3>
+    <div class="addresses">
+        <div class="address" *ngFor="let address of customer.addresses">
+            <div>
+                <div>{{address.firstName}} {{address.lastName}}</div>
+                <div>{{address.street}} {{address.streetNumber}}</div>
+                <div>{{address.postalCode}} {{address.post}}</div>
+                <div>{{address.country}}</div>
+                <div>{{address.phoneNumber}}</div>
+                <div>{{address.email}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px">
+        <h4>Add address</h4>
+        <form [formGroup]="formGroup" class="form" (ngSubmit)="addAddress()">
+            <div class="form-group">
+                <label>First name</label>
+                <input type="text" class="form-control" formControlName="firstName"/>
+            </div>
+            <div class="form-group">
+                <label>Last name</label>
+                <input type="text" class="form-control" formControlName="lastName"/>
+            </div>
+            <div class="form-group">
+                <label>Street</label>
+                <input type="text" class="form-control" formControlName="street"/>
+            </div>
+            <div class="form-group">
+                <label>Street number</label>
+                <input type="text" class="form-control" formControlName="streetNumber"/>
+            </div>
+            <div class="form-group">
+                <label>Postal code</label>
+                <input type="text" class="form-control" formControlName="postalCode"/>
+            </div>
+            <div class="form-group">
+                <label>Post</label>
+                <input type="text" class="form-control" formControlName="post"/>
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" class="form-control" formControlName="country"/>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" formControlName="phoneNumber"/>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" formControlName="email"/>
+            </div>
+            <div>
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+
