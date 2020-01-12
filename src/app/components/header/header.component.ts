@@ -18,7 +18,9 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.authenticated = this.auth.isAuthenticated();
-        this.name = this.auth.getTokenPayload<CustomerPayload>().name;
+        if (this.authenticated) {
+            this.name = this.auth.getTokenPayload<CustomerPayload>().name;
+        }
     }
 
     public login() {
