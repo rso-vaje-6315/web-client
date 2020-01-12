@@ -1,8 +1,22 @@
 .header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
-    h1 {
-        margin-right: 20px;
+    .menu {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            margin-right: 20px;
+        }
+    }
+    .login {
+        margin-right: 50px;
+
+        span {
+            color: #007bff;
+            cursor: pointer;
+        }
     }
 }

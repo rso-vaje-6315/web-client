@@ -1,16 +1,20 @@
 import { Injectable } from "@angular/core";
 import { Apollo, SubscriptionResult } from "apollo-angular";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import gql from "graphql-tag";
-import { map } from "rxjs/operators";
-import { Product } from "../models";
+import { catchError, map, switchMap } from "rxjs/operators";
+import { AverageRating, Product } from "../models";
+import { RatingsService } from "./ratings.service";
+import { ProductDetails } from "../models/product.models";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
     providedIn: "root"
 })
 export class ProductsService {
 
-    constructor(private apollo: Apollo) {
+    constructor(private apollo: Apollo,
+                private ratingsService: RatingsService,) {
     }
 
     public getProductsList(): Observable<Product[]> {
@@ -54,7 +58,7 @@ export class ProductsService {
         );
     }
 
-    public getProductDetails(productId: string): Observable<Product> {
+    public getProductDetails(productId: string): Observable<ProductDetails> {
         return this.apollo.watchQuery({
             query: gql`
             query getDetails($id: String){
@@ -73,6 +77,23 @@ export class ProductsService {
         }).valueChanges.pipe(
             map((res: SubscriptionResult<any>) => {
                 return res.data.product as Product;
+            }),
+            switchMap((product: Product) => {
+                return this.ratingsService.getAverageRating(product.id).pipe(
+                    map((avgRating: AverageRating) => {
+                        const details = new ProductDetails();
+                        Object.assign(details, product);
+                        details.averageRatingNumber = avgRating.averageRatingNumber;
+                        return details;
+                    }),
+                    catchError((err: HttpErrorResponse) => {
+                        if (err.status) {
+                            const details = new ProductDetails();
+                            Object.assign(details, product);
+                            return of(details);
+                        }
+                    })
+                );
             })
         );
     }

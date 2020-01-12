@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CartService } from "../../services/cart.service";
 import { Observable, Subject } from "rxjs";
 import { CartProduct } from "../../models";
-import { startWith, switchMap } from "rxjs/operators";
+import { startWith, switchMap, takeUntil } from "rxjs/operators";
 import { DialogService } from "../../services/dialog.service";
 
 @Component({
@@ -22,6 +22,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.cart$ = this.trigger$.pipe(
+            takeUntil(this.destroy$),
             startWith(null),
             switchMap(() => {
                 return this.cartService.getCart();
@@ -47,6 +48,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.destroy$.next(true);
     }
 
 }

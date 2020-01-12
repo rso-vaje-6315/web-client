@@ -28,9 +28,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
             startWith(null),
             switchMap(() => {
                 return this.productsService.getProductsList();
-            }),
-            tap((products: Product[]) => {
-                console.log(products);
             })
         );
     }

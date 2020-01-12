@@ -3,6 +3,12 @@
     <h2>{{product.name}}</h2>
 
     <div>
+        <span *ngIf="product.averageRatingNumber">
+            Rating: {{product.averageRatingNumber}} / 5
+        </span>
+        <span *ngIf="!product.averageRatingNumber">No ratings yet!</span>
+    </div>
+    <div>
         <span>
             Price: {{product.price}} €
         </span>
@@ -15,4 +21,13 @@
     </div>
 
     <p>{{product.description}}</p>
+
+    <div class="ratings">
+        Rate product:
+        <span (click)="rateProduct(1, product)">*</span>
+        <span (click)="rateProduct(2, product)">*</span>
+        <span (click)="rateProduct(3, product)">*</span>
+        <span (click)="rateProduct(4, product)">*</span>
+        <span (click)="rateProduct(5, product)">*</span>
+    </div>
 </div>

@@ -14,3 +14,19 @@ export class Product extends BaseType {
     public imagePath: string;
     public category: Category;
 }
+
+export class AverageRating {
+    public productId: string;
+    public averageRatingNumber: number;
+}
+
+export class Rating extends BaseType {
+    public productId: string;
+    public ratingNumber: number;
+    public comment: string;
+}
+
+export class ProductDetails extends Product {
+    public averageRatingNumber?: number;
+    public ratings?: Rating[];
+}

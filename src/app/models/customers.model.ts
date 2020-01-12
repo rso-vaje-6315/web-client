@@ -1,4 +1,5 @@
 import { BaseType } from "./base.model";
+import { KeycloakTokenPayload } from "@mjamsek/ngx-keycloak-service/lib/keycloak.models";
 
 export class CustomerPreference extends BaseType {
     public accountId: string;
@@ -34,4 +35,11 @@ export class CustomerDetails {
     public account: Account;
     public addresses: CustomerAddress[];
     public preferences: CustomerPreference[];
+}
+
+export interface CustomerPayload extends KeycloakTokenPayload {
+    name: string;
+    preferred_username: string;
+    given_name: string;
+    family_name: string;
 }

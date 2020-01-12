@@ -6,6 +6,8 @@ import { map, startWith, switchMap, takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Params } from "@angular/router";
 import { CartService } from "../../services/cart.service";
 import { DialogService } from "../../services/dialog.service";
+import { RatingsService } from "../../services/ratings.service";
+import { ProductDetails } from "../../models/product.models";
 
 @Component({
     selector: "rso-product-details-page",
@@ -15,11 +17,12 @@ import { DialogService } from "../../services/dialog.service";
 export class ProductDetailsPageComponent implements OnInit, OnDestroy {
 
     public destroy$ = new Subject<boolean>();
-    public identifier$ = new Subject<string>();
-    public product$: Observable<Product>;
+    public identifier$ = new Subject<Params>();
+    public product$: Observable<ProductDetails>;
 
     constructor(private productsService: ProductsService,
                 private cartService: CartService,
+                private ratingsService: RatingsService,
                 private dialogService: DialogService,
                 private route: ActivatedRoute) {
     }
@@ -43,6 +46,13 @@ export class ProductDetailsPageComponent implements OnInit, OnDestroy {
     public addToCart(product: Product) {
         this.cartService.updateCartQuantity(product.id, 1).subscribe(() => {
             this.dialogService.openToastNotification("Success!", "Item added to cart", "ok");
+        });
+    }
+
+    public rateProduct(rating: number, product: ProductDetails) {
+        this.ratingsService.rateProduct(rating, product.id).subscribe(() => {
+            this.dialogService.openToastNotification("Success!", "Product rated!", "ok");
+            this.identifier$.next(this.route.snapshot.params);
         });
     }
 

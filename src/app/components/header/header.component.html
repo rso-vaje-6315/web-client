@@ -1,7 +1,23 @@
 <div class="header">
-    <h1>E-store</h1>
-    <div>
-        <a [routerLink]="['/']">Home</a> |
-        <a [routerLink]="['/cart']">Cart</a>
+    <div class="menu">
+        <h1>E-store</h1>
+        <div>
+            <span>
+                <a [routerLink]="['/']">Home</a>
+            </span>
+            <span *ngIf="authenticated">
+                | <a [routerLink]="['/cart']">Cart</a>
+            </span>
+            <span *ngIf="authenticated">
+                | <a [routerLink]="['/orders']">Orders</a>
+            </span>
+        </div>
+    </div>
+    <div class="login">
+        <span *ngIf="authenticated">
+            {{name}}
+        </span>
+        <span (click)="logout()" *ngIf="authenticated">Logout</span>
+        <span (click)="login()" *ngIf="!authenticated">Login</span>
     </div>
 </div>
