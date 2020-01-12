@@ -13,7 +13,7 @@ export class ProfilePageComponent implements OnInit {
 
     public customer: CustomerDetails;
 
-    private formGroup: FormGroup;
+    public formGroup: FormGroup;
 
     constructor(private customerService: CustomerService,
                 private dialogService: DialogService,
