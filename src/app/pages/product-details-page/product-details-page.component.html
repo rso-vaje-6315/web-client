@@ -4,7 +4,7 @@
 
     <div>
         <span *ngIf="product.averageRatingNumber">
-            Rating: {{product.averageRatingNumber}} / 5
+            Rating: {{product.averageRatingNumber | number: "1.1-1"}} / 5
         </span>
         <span *ngIf="!product.averageRatingNumber">No ratings yet!</span>
     </div>
