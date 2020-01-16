@@ -4,6 +4,7 @@ import { Observable, Subject } from "rxjs";
 import { CartProduct } from "../../models";
 import { startWith, switchMap, takeUntil } from "rxjs/operators";
 import { DialogService } from "../../services/dialog.service";
+import { AddressDialogComponent } from "./address-dialog/address-dialog.component";
 
 @Component({
     selector: "rso-cart-page",
@@ -45,6 +46,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
             this.dialogService.openToastNotification("Success!", "Cart item removed!", "ok");
             this.trigger$.next();
         });
+    }
+
+    public createOrder() {
+        this.dialogService.openModal(AddressDialogComponent);
     }
 
     ngOnDestroy(): void {

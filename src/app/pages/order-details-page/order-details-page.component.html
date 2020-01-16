@@ -1,13 +1,23 @@
 <div *ngIf="order$ | async as order">
 
+    <div style="padding: 20px 0;">
+        <button *ngIf="isSeller && order.status === 'FULFILLED'" (click)="closeOrder(order)">Close order</button>
+        <button *ngIf="isSeller && order.status === 'PLACED'" (click)="fulfillOrder(order)">Fulfill order</button>
+        <button *ngIf="isCustomer && order.status === 'PLACED'" (click)="cancelOrder(order)">Cancel order</button>
+    </div>
+
     <div>
         Order date: {{order.timestamp | date: "dd.MM.yyyy HH:mm:ss"}}
     </div>
     <div>
-        Order amount: {{order.price}}€
+        Order amount: {{order.price | number: "1.2-2"}}€
     </div>
     <div>
         Order status: {{order.status}}
+    </div>
+
+    <div style="padding: 20px 0;" *ngIf="invoiceUrl">
+        <a [href]="invoiceUrl" target="_blank" rel="noreferrer noopener">Download invoice</a>
     </div>
 
     <div *ngIf="order.products && order.products.length > 0" style="margin-top: 40px">

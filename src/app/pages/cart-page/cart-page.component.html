@@ -3,6 +3,10 @@
 
 <div *ngIf="cart$ | async as carts" class="carts">
 
+    <div style="padding: 20px 0">
+        <button (click)="createOrder()" *ngIf="carts && carts.length > 0">Create order</button>
+    </div>
+
     <table>
         <thead>
             <tr>

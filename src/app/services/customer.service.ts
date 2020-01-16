@@ -25,4 +25,9 @@ export class CustomerService {
         return this.http.post(url, data).pipe(map(() => null));
     }
 
+    public getMyAddresses(): Observable<CustomerAddress[]> {
+        const url = `${this.apiUrl}/customers-service/v1/customers/me/addresses`;
+        return this.http.get(url).pipe(map(res => res as CustomerAddress[]));
+    }
+
 }

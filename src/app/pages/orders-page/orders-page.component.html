@@ -18,7 +18,7 @@
                         {{order.timestamp | date: "dd.MM.yyyy HH:mm:ss"}}
                     </a>
                 </td>
-                <td>{{order.price}} €</td>
+                <td>{{order.price | number: "1.2-2"}} €</td>
             </tr>
         </tbody>
     </table>

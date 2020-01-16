@@ -1,0 +1,17 @@
+<div style="padding: 25px;">
+    <div *ngIf="addresses && addresses.length > 0">
+        <div *ngFor="let address of addresses">
+            <input type="radio" (click)="choseAddress(address)"
+                [checked]="selectedAddress && selectedAddress.id === address.id"/>
+            <span>
+                {{address.firstName}} {{address.lastName}},
+                {{address.street}} {{address.streetNumber}},
+                {{address.postalCode}} {{address.post}},
+                {{address.country}}
+            </span>
+        </div>
+    </div>
+    <div *ngIf="selectedAddress">
+        <button (click)="createOrder()">Create order</button>
+    </div>
+</div>

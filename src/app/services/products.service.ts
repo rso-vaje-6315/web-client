@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { Apollo, SubscriptionResult } from "apollo-angular";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import gql from "graphql-tag";
 import { catchError, map, switchMap } from "rxjs/operators";
 import { AverageRating, Product, ProductStock } from "../models";
@@ -103,6 +103,15 @@ export class ProductsService {
 
     public getProductStock(productId: string): Observable<ProductStock> {
         const url = `${this.apiUrl}/stock-service/v1/warehouses/allstock/${productId}`;
-        return this.http.get(url).pipe(map(res => res as ProductStock));
+        return this.http.get(url).pipe(
+            map(res => res as ProductStock),
+            catchError((err: HttpErrorResponse) => {
+                if (err.status === 404) {
+                    return of({productId, quantity: 0});
+                } else {
+                    throwError(err);
+                }
+            })
+        );
     }
 }
